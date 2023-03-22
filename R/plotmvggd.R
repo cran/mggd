@@ -25,12 +25,14 @@ plotmvggd <- function(mu, Sigma, beta, xlim = c(mu[1] + c(-10, 10)*Sigma[1, 1]),
   #' @param ... Additional arguments to pass to \code{\link{plot3d.function}}.
   #' @return Returns invisibly the probability density function.
   #'
-  #' @author Nizar Bouhlel, Pierre Santagostini
+  #' @author Pierre Santagostini, Nizar Bouhlel
   #' @references E. Gomez, M. Gomez-Villegas, H. Marin. A Multivariate Generalization of the Power Exponential Family of Distribution.
   #' Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
   #' \doi{10.1080/03610929808832115}
   #'
   #' @seealso \code{\link{contourmvggd}}: contour plot of a bivariate generalised Gaussian density.
+  #' 
+  #' \code{\link{mvdggd}}: Probability density of a multivariate generalised Gaussian distribution.
   #'
   #' @examples
   #' mu <- c(1, 4)

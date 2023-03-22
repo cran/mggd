@@ -19,7 +19,7 @@ Computes the Pochhammer symbol.
 }
 \details{
 The Pochhammer symbol is given by:
-\eqn{ (x)_n = \frac{\Gamma(x+n)}{\Gamma(x)} = x (x+1) ... (x+n-1) }
+\deqn{ \displaystyle{ (x)_n = \frac{\Gamma(x+n)}{\Gamma(x)} = x (x+1) ... (x+n-1) } }
 }
 \examples{
 pochhammer(2, 0)
@@ -28,5 +28,5 @@ pochhammer(2, 3)
 
 }
 \author{
-Nizar Bouhlel, Pierre Santagostini
+Pierre Santagostini, Nizar Bouhlel
 }

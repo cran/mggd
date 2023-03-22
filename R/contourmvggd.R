@@ -33,12 +33,14 @@ contourmvggd <- function(mu, Sigma, beta,
   #' @param ... additional arguments to \code{\link{plot.window}}, \code{\link{title}}, \code{\link{Axis}} and \code{\link{box}}, typically \link{graphical parameters} such as \code{cex.axis}.
   #' @return Returns invisibly the probability density function.
   #'
-  #' @author Nizar Bouhlel, Pierre Santagostini
+  #' @author Pierre Santagostini, Nizar Bouhlel
   #' @references E. Gomez, M. Gomez-Villegas, H. Marin. A Multivariate Generalization of the Power Exponential Family of Distribution.
   #' Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
   #' \doi{10.1080/03610929808832115}
   #'
   #' @seealso \code{\link{plotmvggd}}: plot of a bivariate generalised Gaussian density.
+  #' 
+  #' \code{\link{mvdggd}}: Probability density of a multivariate generalised Gaussian distribution.
   #'
   #' @examples
   #' mu <- c(1, 4)
@@ -51,7 +53,7 @@ contourmvggd <- function(mu, Sigma, beta,
   #' @export
   
   if (length(mu)!=2 | nrow(Sigma)!=2 | ncol(Sigma)!=2)
-    stop(paste("plotmvggd only allows plotting a generalised Gaussian density with 2 variables.",
+    stop(paste("contourmvggd only allows plotting a generalised Gaussian density with 2 variables.",
                "mu must be a length 2 numeric vector and Sigma must be a 2*2 square matrix.", sep = "\n"))
   
   # Estimation of the density

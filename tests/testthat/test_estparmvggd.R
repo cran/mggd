@@ -15,8 +15,8 @@ beta2 <- 2.55
 x2 <- mvrggd(10000, mu2, Sigma2, beta2)
 
 # Esimation des paramètres
-x1estim <- estparmvggd(x1, display = TRUE, plot = TRUE)
-x2estim <- estparmvggd(x2, display = TRUE, plot = TRUE)
+x1estim <- estparmvggd(x1, display = FALSE, plot = FALSE)
+x2estim <- estparmvggd(x2, display = FALSE, plot = FALSE)
 
 test_that("estparmvggd works",
   {

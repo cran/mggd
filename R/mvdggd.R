@@ -15,10 +15,12 @@ mvdggd <- function(x, mu, Sigma, beta, tol = 1e-6) {
   #' @return The value of the density.
   #' 
   #' @details The density function of a multivariate generalized Gaussian distribution is given by:
+  #' \deqn{ \displaystyle{ f(\mathbf{x}|\boldsymbol{\mu}, \Sigma, \beta) = \frac{\Gamma\left(\frac{p}{2}\right)}{\pi^\frac{p}{2} \Gamma\left(\frac{p}{2 \beta}\right) 2^\frac{p}{2\beta}} \frac{\beta}{|\Sigma|^\frac{1}{2}} e^{-\frac{1}{2}\left((\mathbf{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x}-\boldsymbol{\mu})\right)^\beta} } }
   #' 
-  #' \eqn{ f(x|\mu, \Sigma, \beta) = \frac{\Gamma\left(\frac{p}{2}\right)}{\pi^\frac{p}{2} \Gamma\left(\frac{p}{2 \beta}\right) 2^\frac{p}{2\beta}} \frac{\beta}{|\Sigma|^\frac{1}{2}} e^{-\frac{1}{2}\left((x-\mu)^T \Sigma^{-1} (x-\mu)\right)^\beta} }
-  #'
-  #' @author Nizar Bouhlel, Pierre Santagostini
+  #' When \eqn{p=1} (univariate case) it becomes:
+  #' \deqn{ \displaystyle{ f(x|\mu, \sigma, \beta) = \frac{\Gamma\left(\frac{1}{2}\right)}{\pi^\frac{1}{2} \Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2\beta}} \frac{\beta}{\sigma^\frac{1}{2}} \ e^{-\left(\frac{(x - \mu)^2}{2 \sigma}\right)^\beta} = \frac{\beta}{\Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2 \beta} \sqrt{\sigma}} \ e^{-\left(\frac{(x - \mu)^2}{2 \sigma}\right)^\beta} } }
+  #' 
+  #' @author Pierre Santagostini, Nizar Bouhlel
   #' @references E. Gomez, M. Gomez-Villegas, H. Marin. A Multivariate Generalization of the Power Exponential Family of Distribution.
   #' Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
   #' \doi{10.1080/03610929808832115}
@@ -26,6 +28,8 @@ mvdggd <- function(x, mu, Sigma, beta, tol = 1e-6) {
   #' @seealso \code{\link{mvrggd}}: random generation from a MGGD.
   #' 
   #' \code{\link{estparmvggd}}: estimation of the parameters of a MGGD.
+  #' 
+  #' \code{\link{plotmvggd}}, \code{\link{contourmvggd}}: plot of the probability density of a bivariate generalised Gaussian distribution.
   #'
   #' @examples
   #' mu <- c(0, 1, 4)
@@ -38,6 +42,10 @@ mvdggd <- function(x, mu, Sigma, beta, tol = 1e-6) {
 
   # Number of variables
   p <- length(mu)
+  
+  # Sigma must be a matrix
+  if (is.numeric(Sigma) & !is.matrix(Sigma))
+    Sigma <- as.matrix(Sigma)
   
   # x must have the same length as mu
   if (length(x) != p)

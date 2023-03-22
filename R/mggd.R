@@ -4,7 +4,7 @@
 #' \itemize{
 #' \item Calculation of distances/divergences between multivariate generalized Gaussian distributions:
 #' \itemize{
-#' \item Kullback-Leibler divergence: \code{\link{kldiv}}
+#' \item Kullback-Leibler divergence: \code{\link{kldggd}}
 #' }
 #' \item Tools for MGGD:
 #' \itemize{

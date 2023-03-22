@@ -26,8 +26,10 @@ with mean vector \code{mu}, dispersion matrix \code{Sigma} and shape parameter \
 }
 \details{
 The density function of a multivariate generalized Gaussian distribution is given by:
+\deqn{ \displaystyle{ f(\mathbf{x}|\boldsymbol{\mu}, \Sigma, \beta) = \frac{\Gamma\left(\frac{p}{2}\right)}{\pi^\frac{p}{2} \Gamma\left(\frac{p}{2 \beta}\right) 2^\frac{p}{2\beta}} \frac{\beta}{|\Sigma|^\frac{1}{2}} e^{-\frac{1}{2}\left((\mathbf{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x}-\boldsymbol{\mu})\right)^\beta} } }
 
-\eqn{ f(x|\mu, \Sigma, \beta) = \frac{\Gamma\left(\frac{p}{2}\right)}{\pi^\frac{p}{2} \Gamma\left(\frac{p}{2 \beta}\right) 2^\frac{p}{2\beta}} \frac{\beta}{|\Sigma|^\frac{1}{2}} e^{-\frac{1}{2}\left((x-\mu)^T \Sigma^{-1} (x-\mu)\right)^\beta} }
+When \eqn{p=1} (univariate case) it becomes:
+\deqn{ \displaystyle{ f(x|\mu, \sigma, \beta) = \frac{\Gamma\left(\frac{1}{2}\right)}{\pi^\frac{1}{2} \Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2\beta}} \frac{\beta}{\sigma^\frac{1}{2}} \ e^{-\left(\frac{(x - \mu)^2}{2 \sigma}\right)^\beta} = \frac{\beta}{\Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2 \beta} \sqrt{\sigma}} \ e^{-\left(\frac{(x - \mu)^2}{2 \sigma}\right)^\beta} } }
 }
 \examples{
 mu <- c(0, 1, 4)
@@ -46,7 +48,9 @@ Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
 \code{\link{mvrggd}}: random generation from a MGGD.
 
 \code{\link{estparmvggd}}: estimation of the parameters of a MGGD.
+
+\code{\link{plotmvggd}}, \code{\link{contourmvggd}}: plot of the probability density of a bivariate generalised Gaussian distribution.
 }
 \author{
-Nizar Bouhlel, Pierre Santagostini
+Pierre Santagostini, Nizar Bouhlel
 }

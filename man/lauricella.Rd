@@ -2,7 +2,7 @@
 % Please edit documentation in R/lauricella.R
 \name{lauricella}
 \alias{lauricella}
-\title{Lauricella Function}
+\title{Lauricella \eqn{D}-Hypergeometric Function}
 \usage{
 lauricella(a, b, g, x, eps = 1e-06)
 }
@@ -22,12 +22,12 @@ A numeric value: the value of the Lauricella function,
 with two attributes \code{attr(, "epsilon")} (precision of the result) and \code{attr(, "k")} (number of iterations).
 }
 \description{
-Computes the Lauricella function.
+Computes the Lauricella \eqn{D}-hypergeometric Function function.
 }
 \details{
-If \eqn{n} is the length of the \eqn{b} and \code{x} vectors, the Lauricella function is given by:
-
-\eqn{F_D^{(n)}\left(a; b_1, ..., b_n; g; x_1, ..., x_n\right) = \sum_{m_1 \geq 0} ... \sum_{m_n \geq 0}{ \frac{ (a)_{m_1+...+m_n}(b_1)_{m_1} ... (b_n)_{m_n} }{ (g)_{m_1+...+m_n} } \frac{x_1^{m_1}}{m_1!} ... \frac{x_1^{m_n}}{m_n!} } }
+If \eqn{n} is the length of the \eqn{b} and \code{x} vectors,
+the Lauricella \eqn{D}-hypergeometric Function function is given by:
+\deqn{\displaystyle{F_D^{(n)}\left(a, b_1, ..., b_n, g; x_1, ..., x_n\right) = \sum_{m_1 \geq 0} ... \sum_{m_n \geq 0}{ \frac{ (a)_{m_1+...+m_n}(b_1)_{m_1} ... (b_n)_{m_n} }{ (g)_{m_1+...+m_n} } \frac{x_1^{m_1}}{m_1!} ... \frac{x_n^{m_n}}{m_n!} } }}
 
 where \eqn{(x)_p} is the Pochhammer symbol (see \code{\link{pochhammer}}).
 
@@ -46,5 +46,5 @@ IEEE Signal Processing Letters, vol. 26 no. 7, July 2019.
 \doi{10.1109/LSP.2019.2915000}
 }
 \author{
-Nizar Bouhlel, Pierre Santagostini
+Pierre Santagostini, Nizar Bouhlel
 }

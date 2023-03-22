@@ -26,12 +26,11 @@ Produces one or more samples from a multivariate (\eqn{p} variables) generalized
 \details{
 A sample from a centered MGGD with dispersion matrix \eqn{\Sigma}
 and shape parameter \eqn{\beta} can be generated using:
+\deqn{\displaystyle{X = \tau \ \Sigma^{1/2} \ U}}
 
-\eqn{X = \tau \Sigma^{1/2} u}
-
-where \eqn{u} is a random vector uniformly distributed on the unit sphere and
-\eqn{\tau} is such that \eqn{\tau^{2\beta}} is generated from a distribution
-\eqn{\Gamma(\frac{p}{2\beta}, 2)}.
+where \eqn{U} is a random vector uniformly distributed on the unit sphere and
+\eqn{\tau} is such that \eqn{\tau^{2\beta}} is generated from a distribution Gamma
+with shape parameter \eqn{\displaystyle{\frac{p}{2\beta}}} and scale parameter \eqn{2}.
 
 This property is used to generate a sample from a MGGD.
 }
@@ -53,5 +52,5 @@ Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
 \code{\link{estparmvggd}}: estimation of the parameters of a MGGD.
 }
 \author{
-Nizar Bouhlel, Pierre Santagostini
+Pierre Santagostini, Nizar Bouhlel
 }

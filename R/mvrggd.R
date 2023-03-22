@@ -15,16 +15,15 @@ mvrggd <- function(n = 1, mu, Sigma, beta, tol = 1e-6) {
   #' 
   #' @details A sample from a centered MGGD with dispersion matrix \eqn{\Sigma}
   #' and shape parameter \eqn{\beta} can be generated using:
+  #' \deqn{\displaystyle{X = \tau \ \Sigma^{1/2} \ U}}
   #' 
-  #' \eqn{X = \tau \Sigma^{1/2} u}
-  #' 
-  #' where \eqn{u} is a random vector uniformly distributed on the unit sphere and
-  #' \eqn{\tau} is such that \eqn{\tau^{2\beta}} is generated from a distribution
-  #' \eqn{\Gamma(\frac{p}{2\beta}, 2)}.
+  #' where \eqn{U} is a random vector uniformly distributed on the unit sphere and
+  #' \eqn{\tau} is such that \eqn{\tau^{2\beta}} is generated from a distribution Gamma
+  #' with shape parameter \eqn{\displaystyle{\frac{p}{2\beta}}} and scale parameter \eqn{2}.
   #' 
   #' This property is used to generate a sample from a MGGD.
   #'
-  #' @author Nizar Bouhlel, Pierre Santagostini
+  #' @author Pierre Santagostini, Nizar Bouhlel
   #' @references E. Gomez, M. Gomez-Villegas, H. Marin. A Multivariate Generalization of the Power Exponential Family of Distribution.
   #' Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
   #' \doi{10.1080/03610929808832115}
@@ -45,8 +44,12 @@ mvrggd <- function(n = 1, mu, Sigma, beta, tol = 1e-6) {
 
   # Number of variables
   p <- length(mu)
-
-  # Sigma1 and Sigma2 must be square matrices with p rows and p columns
+  
+  # Sigma must be a matrix
+  if (is.numeric(Sigma) & !is.matrix(Sigma))
+    Sigma <- as.matrix(Sigma)
+  
+  # Sigma must be a square matrix with p rows and p columns
   if (nrow(Sigma) != p | ncol(Sigma) != p)
     stop("Sigma must be a square matrix with size equal to length(mu).")
 

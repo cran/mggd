@@ -25,7 +25,7 @@ estparmvggd <- function(x, eps = 1e-6, display = FALSE, plot = display) {
   #' 
   #' The precision for the estimation of \code{beta} is given by the \code{eps} parameter.
   #'
-  #' @author Nizar Bouhlel, Pierre Santagostini
+  #' @author Pierre Santagostini, Nizar Bouhlel
   #' 
   #' @references  F. Pascal, L. Bombrun, J.Y. Tourneret, Y. Berthoumieu. Parameter Estimation For Multivariate Generalized Gaussian Distribution.
   #' IEEE Trans. Signal Processing, vol. 61 no. 23, p. 5960-5971, Dec. 2013.
@@ -41,7 +41,7 @@ estparmvggd <- function(x, eps = 1e-6, display = FALSE, plot = display) {
   #' beta <- 0.74
   #' x <- mvrggd(100, mu, Sigma, beta)
   #' 
-  #' # Esimation of the parameters
+  #' # Estimation of the parameters
   #' estparmvggd(x)
   #'
   #' @importFrom graphics plot

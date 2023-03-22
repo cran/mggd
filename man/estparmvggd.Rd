@@ -41,7 +41,7 @@ Sigma <- matrix(c(0.8, 0.3, 0.2, 0.3, 0.2, 0.1, 0.2, 0.1, 0.2), nrow = 3)
 beta <- 0.74
 x <- mvrggd(100, mu, Sigma, beta)
 
-# Esimation of the parameters
+# Estimation of the parameters
 estparmvggd(x)
 
 }
@@ -56,5 +56,5 @@ IEEE Trans. Signal Processing, vol. 61 no. 23, p. 5960-5971, Dec. 2013.
 \code{\link{mvrggd}}: random generation from a MGGD.
 }
 \author{
-Nizar Bouhlel, Pierre Santagostini
+Pierre Santagostini, Nizar Bouhlel
 }

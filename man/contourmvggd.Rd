@@ -56,7 +56,9 @@ Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
 }
 \seealso{
 \code{\link{plotmvggd}}: plot of a bivariate generalised Gaussian density.
+
+\code{\link{mvdggd}}: Probability density of a multivariate generalised Gaussian distribution.
 }
 \author{
-Nizar Bouhlel, Pierre Santagostini
+Pierre Santagostini, Nizar Bouhlel
 }

@@ -10,8 +10,8 @@ pochhammer <- function(x, n) {
   #' @param n positive integer.
   #' @return Numeric value. The value of the Pochhammer symbol.
   #' @details The Pochhammer symbol is given by:
-  #' \eqn{ (x)_n = \frac{\Gamma(x+n)}{\Gamma(x)} = x (x+1) ... (x+n-1) }
-  #' @author Nizar Bouhlel, Pierre Santagostini
+  #' \deqn{ \displaystyle{ (x)_n = \frac{\Gamma(x+n)}{\Gamma(x)} = x (x+1) ... (x+n-1) } }
+  #' @author Pierre Santagostini, Nizar Bouhlel
   #'
   #' @examples
   #' pochhammer(2, 0)
