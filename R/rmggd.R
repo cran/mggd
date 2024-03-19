@@ -1,11 +1,11 @@
-mvrggd <- function(n = 1, mu, Sigma, beta, tol = 1e-6) {
+rmggd <- function(n = 1, mu, Sigma, beta, tol = 1e-6) {
   #' Simulate from a Multivariate Generalized Gaussian Distribution
   #'
   #' Produces one or more samples from a multivariate (\eqn{p} variables) generalized Gaussian distribution (MGGD).
   #'
-  #' @aliases mvrggd
+  #' @aliases rmggd
   #'
-  #' @usage mvrggd(n = 1 , mu, Sigma, beta, tol = 1e-6)
+  #' @usage rmggd(n = 1 , mu, Sigma, beta, tol = 1e-6)
   #' @param n integer. Number of observations.
   #' @param mu length \eqn{p} numeric vector. The mean vector.
   #' @param Sigma symmetric, positive-definite square matrix of order \eqn{p}. The dispersion matrix.
@@ -28,15 +28,15 @@ mvrggd <- function(n = 1, mu, Sigma, beta, tol = 1e-6) {
   #' Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
   #' \doi{10.1080/03610929808832115}
   #' 
-  #' @seealso \code{\link{mvdggd}}: probability density of a MGGD..
+  #' @seealso \code{\link{dmggd}}: probability density of a MGGD..
   #' 
-  #' \code{\link{estparmvggd}}: estimation of the parameters of a MGGD.
+  #' \code{\link{estparmggd}}: estimation of the parameters of a MGGD.
   #'
   #' @examples
   #' mu <- c(0, 0, 0)
   #' Sigma <- matrix(c(0.8, 0.3, 0.2, 0.3, 0.2, 0.1, 0.2, 0.1, 0.2), nrow = 3)
   #' beta <- 0.74
-  #' mvrggd(100, mu, Sigma, beta)
+  #' rmggd(100, mu, Sigma, beta)
   #'
   #' @importFrom MASS mvrnorm
   #' @importFrom stats rgamma

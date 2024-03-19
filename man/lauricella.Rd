@@ -41,7 +41,7 @@ Sometimes, the convergence is too slow and the required precision cannot be reac
 If this happens, the \code{attr(, "epsilon")} attribute is the precision that was really reached.
 }
 \references{
-N. Bouhlel, A. Dziri, Jullback-Leibler Divergence Between Multivariate Generalized Gaussian Distributions.
+N. Bouhlel, A. Dziri, Kullback-Leibler Divergence Between Multivariate Generalized Gaussian Distributions.
 IEEE Signal Processing Letters, vol. 26 no. 7, July 2019.
 \doi{10.1109/LSP.2019.2915000}
 }

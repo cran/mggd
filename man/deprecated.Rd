@@ -3,13 +3,69 @@
 \name{deprecated}
 \alias{deprecated}
 \alias{kldiv}
+\alias{mvdggd}
+\alias{mvrggd}
+\alias{estparmvggd}
+\alias{plotmvggd}
+\alias{contourmvggd}
 \title{Deprecated functions}
 \usage{
 kldiv(sigma1, beta1, sigma2, beta2, eps = 1e-06)
+
+mvdggd(x, mu, Sigma, beta, tol = 1e-06)
+
+mvrggd(n = 1, mu, Sigma, beta, tol = 1e-06)
+
+estparmvggd(x, eps = 1e-06, display = FALSE, plot = display)
+
+plotmvggd(
+  mu,
+  Sigma,
+  beta,
+  xlim = c(mu[1] + c(-10, 10) * Sigma[1, 1]),
+  ylim = c(mu[2] + c(-10, 10) * Sigma[2, 2]),
+  n = 101,
+  xvals = NULL,
+  yvals = NULL,
+  xlab = "x",
+  ylab = "y",
+  zlab = "f(x,y)",
+  col = "gray",
+  tol = 1e-06,
+  ...
+)
+
+contourmvggd(
+  mu,
+  Sigma,
+  beta,
+  xlim = c(mu[1] + c(-10, 10) * Sigma[1, 1]),
+  ylim = c(mu[2] + c(-10, 10) * Sigma[2, 2]),
+  zlim = NULL,
+  npt = 30,
+  nx = npt,
+  ny = npt,
+  main = "Multivariate generalised Gaussian density",
+  sub = NULL,
+  nlevels = 10,
+  levels = pretty(zlim, nlevels),
+  tol = 1e-06,
+  ...
+)
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
 Use \code{\link[=kldggd]{kldggd()}} instead of \code{kldiv()}.
+
+Use \code{\link[=dmggd]{dmggd()}} instead of \code{mvdggd()}.
+
+Use \code{\link[=rmggd]{rmggd()}} instead of \code{mvrggd()}.
+
+Use \code{\link[=estparmggd]{estparmggd()}} instead of \code{estparmvggd()}.
+
+Use \code{\link[=plotmggd]{plotmggd()}} instead of \code{plotmvggd()}.
+
+Use \code{\link[=contourmggd]{contourmggd()}} instead of \code{contourmvggd()}.
 }
 \keyword{internal}

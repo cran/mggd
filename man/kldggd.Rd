@@ -74,7 +74,7 @@ IEEE Signal Processing Letters, vol. 26 no. 7, July 2019.
 \doi{10.1109/LSP.2019.2915000}
 }
 \seealso{
-\link{mvdggd}: probability density of a MGGD.
+\link{dmggd}: probability density of a MGGD.
 }
 \author{
 Pierre Santagostini, Nizar Bouhlel

@@ -50,3 +50,27 @@ test_that("kl works (dim 4)", {
   expect_equal(as.numeric(kl12_9), kl12Matlab)
   expect_equal(as.numeric(kl21_9), kl21Matlab)
 })
+
+# Dimension p = 5
+
+beta1 <- 0.74
+beta2 <- 0.55
+Sigma1 = matrix(c(0.8, 0.3, 0.2, 0, 0, 0.3, 0.2, 0.1, 0, 0,
+                  0.2, 0.1, 0.2, 0, 0, 0, 0, 0, 1, 0,
+                  0, 0, 0, 0, 1), nrow = 5)
+Sigma2 = matrix(c(1, 0.3, 0.2, 0, 0, 0.3, 0.5, 0.1, 0, 0,
+                  0.2, 0.1, 0.7, 0, 0, 0, 0, 0, 1, 0,
+                  0, 0, 0, 0, 2), nrow = 5)
+kl12Matlab_d5 <- 2.598290531977761
+kl21Matlab_d5 <- 12.231185852055095
+
+kl12_d5 <- kldggd(Sigma1, beta1, Sigma2, beta2, eps = 1e-12)
+kl21_d5 <- kldggd(Sigma2, beta2, Sigma1, beta1, eps = 1e-12)
+
+test_that("kl works (dim 5)", {
+  expect_equal(attr(kl12_d5, "eps"), 1e-12)
+  expect_equal(attr(kl21_d5, "eps"), 1e-12)
+  
+  expect_equal(as.numeric(kl12_d5), kl12Matlab_d5)
+  expect_equal(as.numeric(kl21_d5), kl21Matlab_d5)
+})

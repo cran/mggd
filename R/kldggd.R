@@ -39,7 +39,7 @@ kldggd <- function(Sigma1, beta1, Sigma2, beta2, eps = 1e-06) {
   #' and \eqn{X_2}, a random variable distributed according to the generalized Gaussian distribution
   #' with parameters \eqn{(0, \sigma_2, \beta_2)}.
   #' \deqn{ KL(X_1||X_2) = \displaystyle{ \ln{\left(\frac{\frac{\beta_1}{\sqrt{\sigma_1}} \Gamma\left(\frac{1}{2\beta_2}\right)}{\frac{\beta_2}{\sqrt{\sigma_2}} \Gamma\left(\frac{1}{2\beta_1}\right)}\right)} + \frac{1}{2} \left(\frac{1}{\beta_2} - \frac{1}{\beta_1}\right) \ln{2} - \frac{1}{2\beta_2} + 2^{\frac{\beta_2}{\beta_1}-1} \frac{\Gamma{\left(\frac{\beta_2}{\beta_1} + \frac{1}{\beta_1}\right)}}{\Gamma{\left(\frac{1}{2 \beta_1}\right)}} \left(\frac{\sigma_1}{\sigma_2}\right)^{\beta_2} } }
-  #' @seealso [mvdggd]: probability density of a MGGD.
+  #' @seealso [dmggd]: probability density of a MGGD.
   #'
   #' @author Pierre Santagostini, Nizar Bouhlel
   #' @references N. Bouhlel, A. Dziri, Kullback-Leibler Divergence Between Multivariate Generalized Gaussian Distributions.

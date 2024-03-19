@@ -1,11 +1,11 @@
-estparmvggd <- function(x, eps = 1e-6, display = FALSE, plot = display) {
+estparmggd <- function(x, eps = 1e-6, display = FALSE, plot = display) {
   #' Estimation of the Parameters of a Multivariate Generalized Gaussian Distribution
   #'
   #' Estimation of the mean vector, dispersion matrix and shape parameter of a multivariate generalized Gaussian distribution (MGGD).
   #'
-  #' @aliases estparmvggd
+  #' @aliases estparmggd
   #'
-  #' @usage estparmvggd(x, eps = 1e-6, display = FALSE, plot = display)
+  #' @usage estparmggd(x, eps = 1e-6, display = FALSE, plot = display)
   #' @param x numeric matrix or data frame.
   #' @param eps numeric. Precision for the estimation of the beta parameter.
   #' @param display logical. When \code{TRUE} the value of the \code{beta} parameter at each iteration is printed.
@@ -31,18 +31,18 @@ estparmvggd <- function(x, eps = 1e-6, display = FALSE, plot = display) {
   #' IEEE Trans. Signal Processing, vol. 61 no. 23, p. 5960-5971, Dec. 2013.
   #' \doi{DOI: 10.1109/TSP.2013.2282909}
   #'
-  #' @seealso \code{\link{mvdggd}}: probability density of a MGGD.
+  #' @seealso \code{\link{dmggd}}: probability density of a MGGD.
   #' 
-  #' \code{\link{mvrggd}}: random generation from a MGGD.
+  #' \code{\link{rmggd}}: random generation from a MGGD.
   #' 
   #' @examples
   #' mu <- c(0, 1, 4)
   #' Sigma <- matrix(c(0.8, 0.3, 0.2, 0.3, 0.2, 0.1, 0.2, 0.1, 0.2), nrow = 3)
   #' beta <- 0.74
-  #' x <- mvrggd(100, mu, Sigma, beta)
+  #' x <- rmggd(100, mu, Sigma, beta)
   #' 
   #' # Estimation of the parameters
-  #' estparmvggd(x)
+  #' estparmggd(x)
   #'
   #' @importFrom graphics plot
   #' @export

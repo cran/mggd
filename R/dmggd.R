@@ -1,12 +1,12 @@
-mvdggd <- function(x, mu, Sigma, beta, tol = 1e-6) {
+dmggd <- function(x, mu, Sigma, beta, tol = 1e-6) {
   #' Density of a Multivariate Generalized Gaussian Distribution
   #'
   #' Density of the multivariate (\eqn{p} variables) generalized Gaussian distribution (MGGD)
   #' with mean vector \code{mu}, dispersion matrix \code{Sigma} and shape parameter \code{beta}.
   #'
-  #' @aliases mvdggd
+  #' @aliases dmggd
   #'
-  #' @usage mvdggd(x, mu, Sigma, beta, tol = 1e-6)
+  #' @usage dmggd(x, mu, Sigma, beta, tol = 1e-6)
   #' @param x length \eqn{p} numeric vector.
   #' @param mu length \eqn{p} numeric vector. The mean vector.
   #' @param Sigma symmetric, positive-definite square matrix of order \eqn{p}. The dispersion matrix.
@@ -18,25 +18,25 @@ mvdggd <- function(x, mu, Sigma, beta, tol = 1e-6) {
   #' \deqn{ \displaystyle{ f(\mathbf{x}|\boldsymbol{\mu}, \Sigma, \beta) = \frac{\Gamma\left(\frac{p}{2}\right)}{\pi^\frac{p}{2} \Gamma\left(\frac{p}{2 \beta}\right) 2^\frac{p}{2\beta}} \frac{\beta}{|\Sigma|^\frac{1}{2}} e^{-\frac{1}{2}\left((\mathbf{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x}-\boldsymbol{\mu})\right)^\beta} } }
   #' 
   #' When \eqn{p=1} (univariate case) it becomes:
-  #' \deqn{ \displaystyle{ f(x|\mu, \sigma, \beta) = \frac{\Gamma\left(\frac{1}{2}\right)}{\pi^\frac{1}{2} \Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2\beta}} \frac{\beta}{\sigma^\frac{1}{2}} \ e^{-\left(\frac{(x - \mu)^2}{2 \sigma}\right)^\beta} = \frac{\beta}{\Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2 \beta} \sqrt{\sigma}} \ e^{-\left(\frac{(x - \mu)^2}{2 \sigma}\right)^\beta} } }
+  #' \deqn{ \displaystyle{ f(x|\mu, \sigma, \beta) = \frac{\Gamma\left(\frac{1}{2}\right)}{\pi^\frac{1}{2} \Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2\beta}} \frac{\beta}{\sigma^\frac{1}{2}} \ e^{-\frac{1}{2} \left(\frac{(x - \mu)^2}{2 \sigma}\right)^\beta} = \frac{\beta}{\Gamma\left(\frac{1}{2 \beta}\right) 2^\frac{1}{2 \beta} \sqrt{\sigma}} \ e^{-\frac{1}{2} \left(\frac{(x - \mu)^2}{\sigma}\right)^\beta} } }
   #' 
   #' @author Pierre Santagostini, Nizar Bouhlel
   #' @references E. Gomez, M. Gomez-Villegas, H. Marin. A Multivariate Generalization of the Power Exponential Family of Distribution.
   #' Commun. Statist. 1998, Theory Methods, col. 27, no. 23, p 589-600.
   #' \doi{10.1080/03610929808832115}
   #'
-  #' @seealso \code{\link{mvrggd}}: random generation from a MGGD.
+  #' @seealso \code{\link{rmggd}}: random generation from a MGGD.
   #' 
-  #' \code{\link{estparmvggd}}: estimation of the parameters of a MGGD.
+  #' \code{\link{estparmggd}}: estimation of the parameters of a MGGD.
   #' 
-  #' \code{\link{plotmvggd}}, \code{\link{contourmvggd}}: plot of the probability density of a bivariate generalised Gaussian distribution.
+  #' \code{\link{plotmggd}}, \code{\link{contourmggd}}: plot of the probability density of a bivariate generalised Gaussian distribution.
   #'
   #' @examples
   #' mu <- c(0, 1, 4)
   #' Sigma <- matrix(c(0.8, 0.3, 0.2, 0.3, 0.2, 0.1, 0.2, 0.1, 0.2), nrow = 3)
   #' beta <- 0.74
-  #' mvdggd(c(0, 1, 4), mu, Sigma, beta)
-  #' mvdggd(c(1, 2, 3), mu, Sigma, beta)
+  #' dmggd(c(0, 1, 4), mu, Sigma, beta)
+  #' dmggd(c(1, 2, 3), mu, Sigma, beta)
   #'
   #' @export
 
