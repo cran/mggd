@@ -34,8 +34,9 @@ lauricella <- function(a, b, g, x, eps = 1e-06) {
   #' IEEE Signal Processing Letters, vol. 26 no. 7, July 2019.
   #' \doi{10.1109/LSP.2019.2915000}
   #' @importFrom utils combn
+  #' @importFrom data.table rbindlist
   #' @export
-
+  
   # Number of variables
   n <- length(x)
   
@@ -56,7 +57,7 @@ lauricella <- function(a, b, g, x, eps = 1e-06) {
   # M: data.frame of the indices for the nested sums
   # (i.e. all arrangements of n elements from {0:k})
   M <- expand.grid(rep(list(0:k), n))
-
+  
   # Sum of the indices
   Msum <- rowSums(M)
   
@@ -100,7 +101,7 @@ lauricella <- function(a, b, g, x, eps = 1e-06) {
   # lnapoch <- sapply(Msum, function(j) lnpochhammer(a, j))
   lnapoch <- sapply(Msumunique, function(j) lnpochhammer(a, j))
   names(lnapoch) <- Msumunique
-
+  
   # Logarithms of pochhammer(b_i, m_i) for m_1 = 0...k, ...,  m_n = 0...k
   lnbpoch <- as.data.frame(
     matrix(nrow = max(M) + 1, ncol = n, dimnames = list(Munique, 1:n)))
@@ -163,39 +164,52 @@ lauricella <- function(a, b, g, x, eps = 1e-06) {
     k1 <- k + (1:kstep)
     result <- result + res2
     
-    # # M: data.frame of the indices for the nested sums
+    buildMlist <- function(j, isupp, k = k, k1 = k1) {
+      jsupp <- isupp[, j]
+      Ml <- rep(list(0:k), n)
+      for (j in jsupp)
+        Ml[[j]] <- k1
+      return(expand.grid(Ml))
+    }
+    
+    buildxlist <- function(j, isupp, x, xsupp) {
+      jsupp <- isupp[, j]
+      xl <- rep(list(x), n)
+      xl[jsupp] <- xsupp[jsupp]
+      xl[-jsupp] <- x[-jsupp]
+      return(expand.grid(xl))
+    }
+    
+    # M: data.frame of the indices for the nested sums
     # M <- expand.grid(rep(list(k1), n))
     # if (n > 1) {
     #   for (i in 1:(n-1)) {
-    #     Mlist <- c( rep(list(0:k), n-i), rep(list(k1), i) )
-    #     M <- rbind( M, expand.grid(Mlist) )
-    #     for (j in 1:(n-1)) {
-    #       Mlist <- Mlist[c(n, 1:(n-1))]
+    #     indsupp <- combn(n, i)
+    #     for (j in 1:ncol(indsupp)) {
+    #       jsupp <- indsupp[, j]
+    #       Mlist <- vector("list", n)
+    #       for (l in jsupp) Mlist[[l]] <- k1
+    #       for (l in (1:n)[-jsupp]) Mlist[[l]] <- 0:k
     #       M <- rbind(M, expand.grid(Mlist))
     #     }
     #   }
     # }
-    # M1 <- M
-    
-    # M: data.frame of the indices for the nested sums
-    M <- expand.grid(rep(list(k1), n))
+    Mlist <- list(expand.grid(rep(list(k1), n)))
+    if (n == 1) {
+      M <- Mlist[[1]]
+    }
     if (n > 1) {
       for (i in 1:(n-1)) {
         indsupp <- combn(n, i)
-        for (j in 1:ncol(indsupp)) {
-          jsupp <- indsupp[, j]
-          Mlist <- vector("list", n)
-          for (l in jsupp) Mlist[[l]] <- k1
-          for (l in (1:n)[-jsupp]) Mlist[[l]] <- 0:k
-          M <- rbind(M, expand.grid(Mlist))
-        }
+        Mlist <- c(Mlist,
+                   lapply(1:ncol(indsupp), buildMlist, isupp = indsupp, k = k, k1 = k1))
       }
+      M <- data.frame(rbindlist(Mlist))
     }
-    # M2 <- M
     
     # Sum of the indices
     Msum <- rowSums(M)
-
+    
     Munique <- (max(Munique)+1):max(M)
     Msumunique <- (max(Msumunique)+1):max(Msum)
     
@@ -208,17 +222,30 @@ lauricella <- function(a, b, g, x, eps = 1e-06) {
       # Product pochhammer(b_1,m_1) * ...* pochhammer(b_n, m_n)
       xfactsupp[i, j] <- x[j]^Munique[i]
     }
-    gridxfact <- expand.grid(xfactsupp)
-    for (i in 1:(n-1)) {
-      indsupp <- combn(n, i)
-      for (j in 1:ncol(indsupp)) {
-        jsupp <- indsupp[, j]
-        xfactlist <- vector("list", n)
-        names(xfactlist) <- names(gridxfact)
-        xfactlist[jsupp] <- xfactsupp[jsupp]
-        xfactlist[-jsupp] <- xfact[-jsupp]
-        gridxfact <- rbind(gridxfact, expand.grid(xfactlist))
+    # gridxfact <- expand.grid(xfactsupp)
+    # for (i in 1:(n-1)) {
+    #   indsupp <- combn(n, i)
+    #   for (j in 1:ncol(indsupp)) {
+    #     jsupp <- indsupp[, j]
+    #     xfactlist <- vector("list", n)
+    #     names(xfactlist) <- names(gridxfact)
+    #     xfactlist[jsupp] <- xfactsupp[jsupp]
+    #     xfactlist[-jsupp] <- xfact[-jsupp]
+    #     gridxfact <- rbind(gridxfact, expand.grid(xfactlist))
+    #   }
+    # }
+    xfactlist <- list(expand.grid(xfactsupp))
+    if (n == 1) {
+      gridxfact <- xfactlist[[1]]
+    }
+    if (n > 1) {
+      for (i in 1:(n-1)) {
+        indsupp <- combn(n, i)
+        xfactlist <- c(xfactlist,
+                       lapply(1:ncol(indsupp), buildxlist, isupp = indsupp, x = xfact, xsupp = xfactsupp))
       }
+      names(xfactlist[[1]]) <- names(xfactlist[[2]])
+      gridxfact <- data.frame(rbindlist(xfactlist))
     }
     prodxfact <- apply(gridxfact, 1, prod)
     
@@ -227,17 +254,30 @@ lauricella <- function(a, b, g, x, eps = 1e-06) {
     lnfactsupp <- as.data.frame(
       matrix(lfactorial(Munique), nrow = length(Munique),
              ncol = n, dimnames = list(Munique, 1:n)))
-    gridlnfact <- expand.grid(lnfactsupp)
-    for (i in 1:(n-1)) {
-      indsupp <- combn(n, i)
-      for (j in 1:ncol(indsupp)) {
-        jsupp <- indsupp[, j]
-        lnfactlist <- vector("list", n)
-        names(lnfactlist) <- names(gridlnfact)
-        lnfactlist[jsupp] <- lnfactsupp[jsupp]
-        lnfactlist[-jsupp] <- lnfact[-jsupp]
-        gridlnfact <- rbind(gridlnfact, expand.grid(lnfactlist))
+    # gridlnfact <- expand.grid(lnfactsupp)
+    # for (i in 1:(n-1)) {
+    #   indsupp <- combn(n, i)
+    #   for (j in 1:ncol(indsupp)) {
+    #     jsupp <- indsupp[, j]
+    #     lnfactlist <- vector("list", n)
+    #     names(lnfactlist) <- names(gridlnfact)
+    #     lnfactlist[jsupp] <- lnfactsupp[jsupp]
+    #     lnfactlist[-jsupp] <- lnfact[-jsupp]
+    #     gridlnfact <- rbind(gridlnfact, expand.grid(lnfactlist))
+    #   }
+    # }
+    lnfactlist <- list(expand.grid(lnfactsupp))
+    if (n == 1) {
+      gridlnfact <- lnfactlist[[1]]
+    }
+    if (n > 1) {
+      for (i in 1:(n-1)) {
+        indsupp <- combn(n, i)
+        lnfactlist <- c(lnfactlist,
+                       lapply(1:ncol(indsupp), buildxlist, isupp = indsupp, x = lnfact, xsupp = lnfactsupp))
       }
+      names(lnfactlist[[1]]) <- names(lnfactlist[[2]])
+      gridlnfact <- data.frame(rbindlist(lnfactlist))
     }
     sumlnfact <- rowSums(gridlnfact)
     
@@ -260,17 +300,30 @@ lauricella <- function(a, b, g, x, eps = 1e-06) {
       lnbpochsupp[i, j] <- lnpochhammer(b[j], Munique[i])
     }
     # Table of all combinations of the log(pochhammer(b_i, m_i))
-    gridlnbpoch <- expand.grid(lnbpochsupp)
-    for (i in 1:(n-1)) {
-      indsupp <- combn(n, i)
-      for (j in 1:ncol(indsupp)) {
-        jsupp <- indsupp[, j]
-        lnbpochlist <- vector("list", n)
-        names(lnbpochlist) <- names(gridlnbpoch)
-        lnbpochlist[jsupp] <- lnbpochsupp[jsupp]
-        lnbpochlist[-jsupp] <- lnbpoch[-jsupp]
-        gridlnbpoch <- rbind(gridlnbpoch, expand.grid(lnbpochlist))
+    # gridlnbpoch <- expand.grid(lnbpochsupp)
+    # for (i in 1:(n-1)) {
+    #   indsupp <- combn(n, i)
+    #   for (j in 1:ncol(indsupp)) {
+    #     jsupp <- indsupp[, j]
+    #     lnbpochlist <- vector("list", n)
+    #     names(lnbpochlist) <- names(gridlnbpoch)
+    #     lnbpochlist[jsupp] <- lnbpochsupp[jsupp]
+    #     lnbpochlist[-jsupp] <- lnbpoch[-jsupp]
+    #     gridlnbpoch <- rbind(gridlnbpoch, expand.grid(lnbpochlist))
+    #   }
+    # }
+    lnbpochlist <- list(expand.grid(lnbpochsupp))
+    if (n == 1) {
+      gridlnbpoch <- lnbpochlist[[1]]
+    }
+    if (n > 1) {
+      for (i in 1:(n-1)) {
+        indsupp <- combn(n, i)
+        lnbpochlist <- c(lnbpochlist,
+                        lapply(1:ncol(indsupp), buildxlist, isupp = indsupp, x = lnbpoch, xsupp = lnbpochsupp))
       }
+      names(lnbpochlist[[1]]) <- names(lnbpochlist[[2]])
+      gridlnbpoch <- data.frame(rbindlist(lnbpochlist))
     }
     # Sum of the logarithms
     sumlnpochb <- rowSums(gridlnbpoch)

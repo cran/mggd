@@ -14,21 +14,21 @@ plotmggd(mu, Sigma, beta, xlim = c(mu[1] + c(-10, 10)*Sigma[1, 1]),
 
 \item{Sigma}{symmetric, positive-definite square matrix of order 2. The dispersion matrix.}
 
-\item{beta}{positive real number. The shape of the first distribution.}
+\item{beta}{positive real number. The shape of the distribution.}
 
 \item{xlim, ylim}{x-and y- limits.}
 
-\item{n}{A one or two element vector giving the number of steps in the x and y grid, passed to \code{\link{plot3d.function}}.}
+\item{n}{A one or two element vector giving the number of steps in the x and y grid, passed to \code{\link[rgl]{plot3d.function}}.}
 
 \item{xvals, yvals}{The values at which to evaluate \code{x} and \code{y}. If used, \code{xlim} and/or \code{ylim} are ignored.}
 
 \item{xlab, ylab, zlab}{The axis labels.}
 
-\item{col}{The color to use for the plot. See \code{\link{plot3d.function}}.}
+\item{col}{The color to use for the plot. See \code{\link[rgl]{plot3d.function}}.}
 
 \item{tol}{tolerance (relative to largest variance) for numerical lack of positive-definiteness in Sigma, for the estimation of the density. see \code{\link{dmggd}}.}
 
-\item{...}{Additional arguments to pass to \code{\link{plot3d.function}}.}
+\item{...}{Additional arguments to pass to \code{\link[rgl]{plot3d.function}}.}
 }
 \value{
 Returns invisibly the probability density function.
