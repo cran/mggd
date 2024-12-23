@@ -44,6 +44,10 @@ If this happens, the \code{attr(, "epsilon")} attribute is the precision that wa
 N. Bouhlel, A. Dziri, Kullback-Leibler Divergence Between Multivariate Generalized Gaussian Distributions.
 IEEE Signal Processing Letters, vol. 26 no. 7, July 2019.
 \doi{10.1109/LSP.2019.2915000}
+
+N. Bouhlel and D. Rousseau (2023), Exact Rényi and Kullback-Leibler Divergences Between Multivariate t-Distributions.
+IEEE Signal Processing Letters, vol. 30, pp. 1672-1676, October 2023.
+\doi{10.1109/LSP.2023.3324594}
 }
 \author{
 Pierre Santagostini, Nizar Bouhlel
